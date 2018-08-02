@@ -1,6 +1,12 @@
 modulesSettings:
   src/Main.luna:
-    typeRepToVisMap: []
+    typeRepToVisMap:
+    - - tag: TCons
+        contents:
+        - Dataframe
+        - []
+      - - ! 'ProjectVisualizer: plotly: plotly'
+        - plotly/plotly.html
     currentBreadcrumb: main
     breadcrumbsSettings:
     - - items: []
