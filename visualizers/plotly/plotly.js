@@ -19,7 +19,6 @@
   var getColor = function (array, r,g,b,a, defR, defG, defB, defA){
     var newColorArr = Array(array.length).fill('rgb(' + defR + ',' + defG + ',' + defB + ',' + defA + ')');
     if ((r != -1) || (g != -1) || (b  != -1) || (a != -1)) {
-      console.log("dupa")
       for (var j = 0; j<array.length; j++){
         var x = array[j];
         if (x[r] != " " && x[g] != " " && x[b] != " " && x[a] != " ") {newColorArr[j] = 'rgb(' + x[r] + ',' + x[g] + ',' + x[b] + ',' + x[a] + ')'};
@@ -73,8 +72,43 @@
           mode: "markers",
           name: "scatter1"
         };
-        console.log(trace)
-        Plotly.newPlot("plotly_div", [trace]);
+        var layout = {
+          font: {
+              family: "Hasklig, monospace",
+              size: 12,
+              color: "#abb2bf"
+          },
+          margin: {
+              l: 50,
+              r: 50,
+              b: 50,
+              t: 50,
+              pad: 4
+          },
+          xaxis: {
+            autotick: true,
+            ticks: 'outside',
+            tick0: 0,
+            dtick: 0.05,
+            ticklen: 3,
+            tickwidth: 1,
+            tickcolor: '#abb2bf',
+            linecolor: '#abb2bf'
+          },
+          yaxis: {
+            autotick: true,
+            ticks: 'outside',
+            tick0: 0,
+            dtick: 0.05,
+            ticklen: 3,
+            tickwidth: 1,
+            tickcolor: '#abb2bf',
+            linecolor: '#abb2bf'
+          },
+          paper_bgcolor: "#181b1f",
+          plot_bgcolor: "#181b1f"
+        };
+        Plotly.newPlot("plotly_div", [trace], layout);
     };
     });
 
