@@ -42,7 +42,6 @@ jobs:
       - run: 
           name: Install conda deps
           command: |
-            conda update conda 
             conda install -c conda-forge circleci-helpers
             conda create -n dataframes python=3.6
             conda activate dataframes
