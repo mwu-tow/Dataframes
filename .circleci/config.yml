@@ -36,9 +36,9 @@ jobs:
           name: Install conda 
           command: | 
             curl https://repo.anaconda.com/archive/Anaconda3-5.2.0-MacOSX-x86_64.sh -o anaconda3.sh
-            bash anaconda3.sh -b -p ~/anaconda3
+            bash anaconda3.sh -b -p $HOME/anaconda3
             rm anaconda3.sh
-            echo 'export PATH="~/anaconda3/bin:$PATH"' >> $BASH_ENV
+            echo 'export PATH="$HOME/anaconda3/bin:$PATH"' >> $BASH_ENV
       - run: 
           name: Install conda deps
           command: |
