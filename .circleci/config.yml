@@ -34,23 +34,23 @@ jobs:
       steps:
         - checkout
         - run:
-          name: Install dependencies
-          command: | 
-            conda install -c conda-forge circleci-helpers
-            conda create -n dataframes python=3.6
-            conda activate dataframes
-            conda install arrow-cpp=0.10.* -c conda-forge
-            conda install pyarrow=0.10.* -c conda-forge
-            conda install rapidjson
-            conda install fmt
+            name: Install conda dependencies
+            command: | 
+              conda install -c conda-forge circleci-helpers
+              conda create -n dataframes python=3.6
+              conda activate dataframes
+              conda install arrow-cpp=0.10.* -c conda-forge
+              conda install pyarrow=0.10.* -c conda-forge
+              conda install rapidjson
+              conda install fmt
         - run:
-            name: Configure CMake
+            name: Configure Dataframes CMake
             command: |
               mkdir build
               cd build
               cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../native_libs/src -DCMAKE_LIBRARY_PATH /anaconda3/envs/dataframes/lib -DCMAKE_INCLUDE_PATH /anaconda3/envs/dataframes/include
         - run:
-            name: Build Dataframes C++ parts
+            name: Build Dataframes C++ parts on macos
             command: |
               cd build
               make -j 2
