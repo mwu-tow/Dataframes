@@ -45,7 +45,7 @@ jobs:
             sudo ln -s /Users/distiller/anaconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh
       - save_cache:
           key: source-v1
-          paths: /anaconda3
+          paths: "/anaconda3"
       - run: 
           name: Install conda deps
           command: |
