@@ -41,11 +41,8 @@ jobs:
             curl https://repo.anaconda.com/archive/Anaconda3-5.2.0-MacOSX-x86_64.sh -o anaconda3.sh
             bash anaconda3.sh -b -p $HOME/anaconda3
             rm anaconda3.sh
-            echo 'export PATH="$HOME/anaconda3/bin:$PATH"' >> $BASH_ENV
-            sudo ln -s /Users/distiller/anaconda3/etc/profile.d/conda.sh /etc/profile.d/conda.sh
-      - save_cache:
-          key: source-v1
-          paths: "/anaconda3"
+            echo ". $HOME/anaconda3/etc/profile.d/conda.sh" >> $HOME/.bash_profile
+            echo "conda activate" >> $HOME/.bash_profile
       - run: 
           name: Install conda deps
           command: |
@@ -56,6 +53,10 @@ jobs:
             conda install pyarrow=0.10.* -c conda-forge
             conda install rapidjson
             conda install fmt
+      - save_cache:
+          key: source-v1
+          paths: "$HOME/anaconda3"
+          when: always
       - checkout
       - run:
           name: Configure Dataframes CMake
