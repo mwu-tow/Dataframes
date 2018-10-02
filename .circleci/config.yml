@@ -33,6 +33,9 @@ jobs:
       xcode: "9.0"
     steps:
       - run:
+          name: install bash
+          command: brew install bash
+      - run:
           name: Install conda 
           command: | 
             curl https://repo.anaconda.com/archive/Anaconda3-5.2.0-MacOSX-x86_64.sh -o anaconda3.sh
