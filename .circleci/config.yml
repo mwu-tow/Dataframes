@@ -64,11 +64,17 @@ jobs:
           when: always
       - checkout
       - run:
+          name: Download date dependency
+          command: |
+            mkdir -p include/date
+            cd include/date
+            wget https://raw.githubusercontent.com/HowardHinnant/date/master/include/date/date.h
+      - run:
           name: Configure Dataframes CMake
           command: |
             mkdir build
             cd build
-            cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_LIBRARY_PATH=$HOME/anaconda3/envs/dataframes/lib -DCMAKE_INCLUDE_PATH=$HOME/anaconda3/envs/dataframes/include ../native_libs/src
+            cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_LIBRARY_PATH=$HOME/anaconda3/envs/dataframes/lib -DCMAKE_INCLUDE_PATH=$HOME/anaconda3/envs/dataframes/include;../include ../native_libs/src
       - run:
           name: Build Dataframes C++ parts on macos
           command: |
