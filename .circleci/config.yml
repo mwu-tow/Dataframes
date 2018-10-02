@@ -40,7 +40,8 @@ jobs:
           command: brew install fmt cmake
       - run:
           name: Install conda 
-          command: | 
+          command: |
+            [ -d $HOME/anaconda3 ] && exit
             curl https://repo.anaconda.com/archive/Anaconda3-5.2.0-MacOSX-x86_64.sh -o anaconda3.sh
             bash anaconda3.sh -b -p $HOME/anaconda3
             rm anaconda3.sh
