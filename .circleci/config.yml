@@ -55,7 +55,7 @@ jobs:
             conda install fmt
       - save_cache:
           key: source-v1
-          paths: "$HOME/anaconda3"
+          paths: ~/anaconda3
           when: always
       - checkout
       - run:
