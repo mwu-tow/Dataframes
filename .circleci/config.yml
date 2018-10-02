@@ -68,7 +68,7 @@ jobs:
           command: |
             mkdir build
             cd build
-            cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../native_libs/src -DCMAKE_LIBRARY_PATH /anaconda3/envs/dataframes/lib -DCMAKE_INCLUDE_PATH /anaconda3/envs/dataframes/include
+            cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo -DCMAKE_LIBRARY_PATH=$HOME/anaconda3/envs/dataframes/lib -DCMAKE_INCLUDE_PATH=$HOME/anaconda3/envs/dataframes/include ../native_libs/src
       - run:
           name: Build Dataframes C++ parts on macos
           command: |
