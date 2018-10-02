@@ -52,7 +52,7 @@ jobs:
             conda install -y arrow-cpp=0.10.* -c conda-forge
             conda install -y pyarrow=0.10.* -c conda-forge
             conda install -y rapidjson
-            conda install -c sarcasm fmt
+            conda install -y -c sarcasm fmt
       - save_cache:
           key: source-v1
           paths: ~/anaconda3
