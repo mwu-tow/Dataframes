@@ -33,14 +33,15 @@ jobs:
       xcode: "9.0"
     steps:
       - run:
-          name: Install conda dependencies
+          name: Install conda 
           command: | 
             curl https://repo.anaconda.com/archive/Anaconda3-5.2.0-MacOSX-x86_64.sh -o anaconda3.sh
             bash anaconda3.sh -b -p ~/anaconda3
             rm anaconda3.sh
-            touch ~/.bash_profile
-            echo 'export PATH="~/anaconda3/bin:$PATH"' >> ~/.bash_profile
-            source .bash_profile
+            echo 'export PATH="~/anaconda3/bin:$GOPATH"' >> $BASH_ENV
+      - run: 
+          name: Install conda deps
+          command: |
             conda update conda 
             conda install -c conda-forge circleci-helpers
             conda create -n dataframes python=3.6
