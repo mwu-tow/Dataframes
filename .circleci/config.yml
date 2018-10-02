@@ -38,6 +38,7 @@ jobs:
             curl https://repo.anaconda.com/archive/Anaconda3-5.2.0-MacOSX-x86_64.sh -o anaconda3.sh
             bash anaconda3.sh -b -p ~/anaconda3
             rm anaconda3.sh
+            touch ~/.bash_profile
             echo 'export PATH="~/anaconda3/bin:$PATH"' >> ~/.bash_profile
             source .bash_profile
             conda update conda 
