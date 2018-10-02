@@ -36,8 +36,8 @@ jobs:
           keys:
             - source-v2
       - run:
-          name: Install fmt
-          command: brew install fmt
+          name: Install fmt & cmake
+          command: brew install fmt cmake
       - run:
           name: Install conda 
           command: | 
