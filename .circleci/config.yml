@@ -34,7 +34,10 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - source-v1
+            - source-v2
+      - run:
+          name: brew install dependencies
+          commnad: brew install fmt
       - run:
           name: Install conda 
           command: | 
@@ -52,9 +55,8 @@ jobs:
             conda install -y arrow-cpp=0.10.* -c conda-forge
             conda install -y pyarrow=0.10.* -c conda-forge
             conda install -y rapidjson
-            conda install -y -c sarcasm fmt
       - save_cache:
-          key: source-v1
+          key: source-v2
           paths: ~/anaconda3
           when: always
       - checkout
