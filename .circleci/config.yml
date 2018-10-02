@@ -54,8 +54,7 @@ jobs:
           name: Install conda deps
           command: |
             conda install -c conda-forge circleci-helpers
-            conda create -n dataframes python=3.6
-            conda activate dataframes
+            conda activate dataframes || (conda create -n dataframes python=3.6 && conda activate dataframes)
             conda install -y arrow-cpp=0.10.* -c conda-forge
             conda install -y pyarrow=0.10.* -c conda-forge
             conda install -y rapidjson
