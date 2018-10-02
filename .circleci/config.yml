@@ -32,28 +32,28 @@ jobs:
     macos:
       xcode: "9.0"
       steps:
-      - checkout
-      - run:
-        name: Install dependencies
-        command: | 
-          conda install -c conda-forge circleci-helpers
-          conda create -n dataframes python=3.6
-          conda activate dataframes
-          conda install arrow-cpp=0.10.* -c conda-forge
-          conda install pyarrow=0.10.* -c conda-forge
-          conda install rapidjson
-          conda install fmt
-      - run:
-          name: Configure CMake
-          command: |
-            mkdir build
-            cd build
-            cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../native_libs/src -DCMAKE_LIBRARY_PATH /anaconda3/envs/dataframes/lib -DCMAKE_INCLUDE_PATH /anaconda3/envs/dataframes/include
-      - run:
-          name: Build Dataframes C++ parts
-          command: |
-            cd build
-            make -j 2
+        - checkout
+        - run:
+          name: Install dependencies
+          command: | 
+            conda install -c conda-forge circleci-helpers
+            conda create -n dataframes python=3.6
+            conda activate dataframes
+            conda install arrow-cpp=0.10.* -c conda-forge
+            conda install pyarrow=0.10.* -c conda-forge
+            conda install rapidjson
+            conda install fmt
+        - run:
+            name: Configure CMake
+            command: |
+              mkdir build
+              cd build
+              cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../native_libs/src -DCMAKE_LIBRARY_PATH /anaconda3/envs/dataframes/lib -DCMAKE_INCLUDE_PATH /anaconda3/envs/dataframes/include
+        - run:
+            name: Build Dataframes C++ parts
+            command: |
+              cd build
+              make -j 2
 
 
 workflows:
