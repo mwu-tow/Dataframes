@@ -41,8 +41,8 @@ jobs:
             curl https://repo.anaconda.com/archive/Anaconda3-5.2.0-MacOSX-x86_64.sh -o anaconda3.sh
             bash anaconda3.sh -b -p $HOME/anaconda3
             rm anaconda3.sh
-            echo ". $HOME/anaconda3/etc/profile.d/conda.sh" >> $HOME/.bash_profile
-            echo "conda activate" >> $HOME/.bash_profile
+            echo ". $HOME/anaconda3/etc/profile.d/conda.sh" >> $BASH_ENV
+            echo "conda activate" >> $BASH_ENV
       - run: 
           name: Install conda deps
           command: |
