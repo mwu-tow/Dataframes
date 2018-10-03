@@ -30,7 +30,7 @@ jobs:
       CXX: g++-8
   macos-build:
     macos:
-      xcode: "9.0"
+      xcode: "9.4.1"
     steps:
       - restore_cache:
           keys:
