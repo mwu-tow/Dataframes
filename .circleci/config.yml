@@ -34,7 +34,7 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - source-v3
+            - source-v4
       - run:
           name: Install fmt & cmake & wget
           command: brew install fmt cmake wget
@@ -54,10 +54,9 @@ jobs:
           name: Install conda deps
           command: |
             conda install -c conda-forge circleci-helpers
-            conda activate dataframes || (conda create -n dataframes python=3.6 && conda activate dataframes)
-            conda install -y arrow-cpp=0.10.* pyarrow=0.10 numpy rapidjson -c conda-forge
+            conda activate dataframes || (conda create -n dataframes python=3.6 arrow-cpp=0.10.* pyarrow=0.10 numpy rapidjson -c conda-forge && conda activate dataframes)
       - save_cache:
-          key: source-v3
+          key: source-v4
           paths: ~/anaconda3
           when: always
       - checkout
