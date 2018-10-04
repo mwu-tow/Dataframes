@@ -34,7 +34,7 @@ jobs:
     steps:
       - restore_cache:
           keys:
-            - source-v2
+            - source-v3
       - run:
           name: Install fmt & cmake & wget
           command: brew install fmt cmake wget
@@ -57,7 +57,7 @@ jobs:
             conda activate dataframes || (conda create -n dataframes python=3.6 && conda activate dataframes)
             conda install -y arrow-cpp=0.10.* pyarrow=0.10 numpy rapidjson -c conda-forge
       - save_cache:
-          key: source-v2
+          key: source-v3
           paths: ~/anaconda3
           when: always
       - checkout
