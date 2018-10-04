@@ -55,9 +55,7 @@ jobs:
           command: |
             conda install -c conda-forge circleci-helpers
             conda activate dataframes || (conda create -n dataframes python=3.6 && conda activate dataframes)
-            conda install -y arrow-cpp=0.10.* -c conda-forge
-            conda install -y pyarrow=0.10.* -c conda-forge
-            conda install -y rapidjson
+            conda install -y arrow-cpp=0.10.* pyarrow=0.10 numpy rapidjson -c conda-forge
       - save_cache:
           key: source-v2
           paths: ~/anaconda3
