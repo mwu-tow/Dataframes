@@ -92,11 +92,58 @@ class Table:
         ptrs = columns.each .ptr
         schema = Schema.fromFields fields
         self.fromWrapper $ createTableWrapper schema.ptr ptrs
+
+    # Reads file from the hard drive, returning a `Table` value.
+    #
+    # Works for CSV and xlsx files. For CSV files it is assumed thath first row contain column names. Column types are deduced. If deduction fails the `Text` type will be applied.
+    #
+    # > import Dataframes.Table
+    # >
+    # > def main:
+    # >     Table.read "./data/simple_empty.csv"
+    # >     None
+    #
+    # `filepath`: Path to the file to read.
+    #
+    # `return`: `Table` value containing the data from file.
+    
     def read path:
         self.fromWrapper $ readTableFromFile path
 
+    # Counts number of columns for the `self` Table.
+    #
+    # > import Dataframes.Table
+    # >
+    # > def main:
+    # >     l1 = [1,2,3,4,5]
+    # >     l2 = [11,12,13,14,15]
+    # >     col1 = Column.fromList "col1" Int64Type l1
+    # >     col2 = Column.fromList "col2" Int64Type l2
+    # >     table = Table.fromColumns [col1 , col2]
+    # >     columns = table.columnCount
+    # >     None 
+    #
+    # `return`: `Int` value with number of columns.
+
     def columnCount: self.ptr.columnCount
+
+    # Counts number of rows for the `self` Table.
+    #
+    # > import Dataframes.Table
+    # >
+    # > def main:
+    # >     l1 = [1,2,3,4,5]
+    # >     l2 = [11,12,13,14,15]
+    # >     col1 = Column.fromList "col1" Int64Type l1
+    # >     col2 = Column.fromList "col2" Int64Type l2
+    # >     table = Table.fromColumns [col1 , col2]
+    # >     columns = table.rowCount
+    # >     None 
+    #
+    # `return`: `Int` value with number of rows.
+
     def rowCount: self.ptr.rowCount
+
     def schema:
         wrapper = self.ptr.schema
         SchemaVal wrapper
@@ -159,7 +206,7 @@ class Table:
     # ![](data/docs/docs3.png)
 
     def addColumn index column:
-        self.fromWrapper $ self.ptr.addColumn index column.ptr
+        self.fromWrapper $ self.ptr.addColumn index column.ptr    
     def concat ts:
         cols = ts . each .toList . concat
         self.fromColumns cols
