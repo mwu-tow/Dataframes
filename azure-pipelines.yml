@@ -16,6 +16,8 @@ jobs:
   pool:
     vmImage: 'Ubuntu-16.04'
   container: lunalang/dataframes-package:1.0.3
+  variables: 
+    PYTHON_PREFIX_PATH: /python-dist
   steps:
   - script: |
       cd scripts
