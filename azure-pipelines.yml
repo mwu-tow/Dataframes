@@ -12,7 +12,7 @@ trigger:
 variables:
   Dataframes.Repo.Path: $(Build.SourcesDirectory) # this one is required by the build script
 jobs:
-- job: Ubuntu
+- job: Linux
   pool:
     vmImage: 'Ubuntu-16.04'
   container: lunalang/dataframes-package:1.0.3
@@ -80,7 +80,7 @@ jobs:
     vmImage: vs2017-win2016
   steps:
   - script: |
-      set
+      dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC"
       python -m pip install numpy==1.15.*
       curl -sS -o stack.zip -L --insecure https://get.haskellstack.org/stable/windows-x86_64.zip
       7z x stack.zip -y -oC:\stack stack.exe
