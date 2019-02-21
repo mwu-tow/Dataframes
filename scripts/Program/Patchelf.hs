@@ -8,6 +8,8 @@ import Text.Printf
 import Program
 import Utils
 
+import System.PosixCompat.Files
+
 data Patchelf
 instance Program Patchelf where
     executableName = "patchelf"
@@ -45,7 +47,10 @@ removeRpath binaryPath = call @Patchelf ["--remove-rpath", binaryPath]
 installBinary :: FilePath -> FilePath -> FilePath -> IO ()
 installBinary outputDirectory dependenciesDirectory sourcePath = do
     newBinaryPath <- copyToDir outputDirectory sourcePath
+    oldStatus <- getFileStatus newBinaryPath
+    setFileMode newBinaryPath $ unionFileModes (fileMode oldStatus) (ownerWriteMode)
     setRelativeRpath newBinaryPath [dependenciesDirectory, outputDirectory]
+    setFileMode newBinaryPath (fileMode oldStatus)
 
 -- Installs binary to the folder and sets this folder as rpath.
 -- Typically used with dependencies (when install-to directory and dependencies directory are same)
