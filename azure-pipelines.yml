@@ -9,18 +9,32 @@ trigger:
     include:
     - "*"
 
+variables:
+  Dataframes.Repo.Path: $(Build.SourcesDirectory) # this one is required by the build script
 jobs:
 - job: Ubuntu
   pool:
     vmImage: 'Ubuntu-16.04'
+  container: lunalang/dataframesci:1.0.9
   steps:
   - script: |
-      pwd
+      mkdir build
+      cd build
+      cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../native_libs/src
+    displayName: Configure Dataframes
+  - script: |
+      make -j 2
+    displayName: Build Dataframes
+  - script: | 
+      mkdir build/test_results
+      native_libs/linux/DataframeHelperTests --log_format=JUNIT --log_sink=build/test_results/junit.xml -r short
     displayName: 'Build Linux'
 - job: macOS
   pool:
     vmImage: 'macOS-10.13'
   steps:
+  - script: sudo xcode-select --switch /Applications/Xcode_10.app/Contents/Developer
+    displayName: Select XCode version
   - script: |
       brew update
       brew upgrade
@@ -64,6 +78,7 @@ jobs:
     vmImage: vs2017-win2016
   steps:
   - script: |
+      set
       python -m pip install numpy==1.15.*
       curl -sS -o stack.zip -L --insecure https://get.haskellstack.org/stable/windows-x86_64.zip
       7z x stack.zip -y -oC:\stack stack.exe
