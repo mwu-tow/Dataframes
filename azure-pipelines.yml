@@ -15,21 +15,17 @@ jobs:
 - job: Ubuntu
   pool:
     vmImage: 'Ubuntu-16.04'
-  container: lunalang/dataframesci:1.0.9
+  container: lunalang/dataframes-package:1.0.3
   steps:
   - script: |
-      mkdir build
-      cd build
-      cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../native_libs/src
-    displayName: Configure Dataframes
-  - script: |
-      cd build
-      make -j 2
+      cd scripts
+      stack build
+      stack exec dataframes-package
     displayName: Build Dataframes
-  - script: | 
-      mkdir build/test_results
-      native_libs/linux/DataframeHelperTests --log_format=JUNIT --log_sink=build/test_results/junit.xml -r short
-    displayName: 'Build Linux'
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: scripts/Dataframes-Linux-x64.tar.gz
+      artifactName: Dataframes-Linux-x64
 - job: macOS
   pool:
     vmImage: 'macOS-10.13'
@@ -70,10 +66,13 @@ jobs:
       export PATH=$PATH:~/.local/bin
       curl -sSL https://get.haskellstack.org/ | sh
       export PYTHON_PREFIX_PATH=~/python-dist/
-      export DATAFRAMES_REPO_PATH=$PWD
       cd scripts
       stack run
-    displayName: Configure Dataframes CMake
+    displayName: Build Dataframes
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: scripts/Dataframes-macOS-x64.tar.gz
+      artifactName: Dataframes-macOS-x64
 - job: Windows
   pool:
     vmImage: vs2017-win2016
@@ -86,3 +85,7 @@ jobs:
       set PATH=%PATH%;C:\stack
       cd $(Build.SourcesDirectory)\scripts\
       stack run --cwd $(Build.SourcesDirectory)
+  - task: PublishBuildArtifacts@1
+    inputs:
+      pathtoPublish: scripts/Dataframes-Win-x64.7z
+      artifactName: Dataframes-Win-x64
