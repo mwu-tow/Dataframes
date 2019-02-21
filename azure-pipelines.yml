@@ -22,7 +22,7 @@ jobs:
     vmImage: 'macOS-10.13'
   steps:
   - script: |
-      brew update
+      brew update || brew upgrade
       brew install fmt cmake apache-arrow boost rapidjson howard-hinnant-date pcre pybind11 wget openssl
     displayName: Install C++ dependencies
   - script: |
@@ -67,6 +67,4 @@ jobs:
       curl -sS -o stack.zip -L --insecure https://get.haskellstack.org/stable/windows-x86_64.zip
       7z x stack.zip -y -oC:\stack stack.exe
       cd %APPVEYOR_BUILD_FOLDER%\scripts\
-      # Note: we want build artifacts to appear in root as apparently AppVeyor really
-      # wants to preserve relative path from root to artifact when uploading to S3
       stack run --cwd %APPVEYOR_BUILD_FOLDER%
