@@ -23,6 +23,7 @@ jobs:
       cmake -DCMAKE_BUILD_TYPE=RelWithDebInfo ../native_libs/src
     displayName: Configure Dataframes
   - script: |
+      cd build
       make -j 2
     displayName: Build Dataframes
   - script: | 
