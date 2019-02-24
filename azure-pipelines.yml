@@ -13,14 +13,9 @@ jobs:
   - script: |
       "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" modify --wait --passive --norestart --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise" --add Microsoft.VisualStudio.Component.VC.Tools.14.15
       echo Result %ERRORLEVEL%
+      copy %temp%\dd* %userprofile%\tmp
       dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC"
-      python -m pip install numpy==1.15.*
-      curl -sS -o stack.zip -L --insecure https://get.haskellstack.org/stable/windows-x86_64.zip
-      7z x stack.zip -y -oC:\stack stack.exe
-      set PATH=%PATH%;C:\stack
-      cd $(Build.SourcesDirectory)\scripts\
-      stack run --cwd $(Build.SourcesDirectory)
   - task: PublishBuildArtifacts@1
     inputs:
-      pathtoPublish: scripts/Dataframes-Win-x64.7z
+      pathtoPublish: $(Build.ArtifactStagingDirectory)
       artifactName: Dataframes-Win-x64
