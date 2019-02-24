@@ -11,7 +11,7 @@ jobs:
     vmImage: vs2017-win2016
   steps:
   - script: |
-      "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" modify --wait --passive --norestart --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise" --add Microsoft.VisualStudio.Component.VC.Tools.14.15
+      "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" --wait modify --passive --norestart --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise" --add Microsoft.VisualStudio.Component.VC.Tools.14.15
       echo Result %ERRORLEVEL%
       copy %temp%\dd* $(Build.ArtifactStagingDirectory)
       dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC"
