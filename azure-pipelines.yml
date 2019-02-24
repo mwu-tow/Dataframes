@@ -11,7 +11,7 @@ jobs:
     vmImage: vs2017-win2016
   steps:
   - script: |
-      dir "C:\Program Files (x86)\Microsoft Visual Studio\Installer"
+      "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" modify --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise" --add Microsoft.VisualStudio.Component.VC.Tools.14.15
       dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC"
       python -m pip install numpy==1.15.*
       curl -sS -o stack.zip -L --insecure https://get.haskellstack.org/stable/windows-x86_64.zip
