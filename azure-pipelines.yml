@@ -13,7 +13,7 @@ jobs:
   - script: |
       "C:\Program Files (x86)\Microsoft Visual Studio\Installer\vs_installer.exe" modify --wait --passive --norestart --installPath "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise" --add Microsoft.VisualStudio.Component.VC.Tools.14.15
       echo Result %ERRORLEVEL%
-      copy %temp%\dd* %userprofile%\tmp
+      copy %temp%\dd* $(Build.ArtifactStagingDirectory)
       dir "C:\Program Files (x86)\Microsoft Visual Studio\2017\Enterprise\VC\Tools\MSVC"
   - task: PublishBuildArtifacts@1
     inputs:
